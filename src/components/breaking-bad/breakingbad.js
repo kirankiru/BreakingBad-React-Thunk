@@ -3,7 +3,7 @@ import styled from 'styled-components';
 import { connect } from 'react-redux';
 import CharacterContainer from '../card/characterContainer';
 import store from '../../redux/store';
-import {BEGIN_BREAKING_BAD_CHARACTERS_FETCH} from  '../../redux/actions';
+import {BEGIN_BREAKING_BAD_CHARACTERS_FETCH, fetchBreakingBadCharacterBegins,fetchBreakingBadCharacters} from  '../../redux/actions';
 
 const Container = styled.div`
     width: 100%;
@@ -16,7 +16,7 @@ const Container = styled.div`
 const BreakingBad = (props) => {
 
 
-    //store.dispatch({type: BEGIN_BREAKING_BAD_CHARACTERS_FETCH});
+    store.dispatch(fetchBreakingBadCharacters());
 
     const handleClick = () => {
         alert("Button clicked");
@@ -39,9 +39,9 @@ const BreakingBad = (props) => {
             <button onClick={handleClick}>Click to get Breaking bad characters</button>
             <Container>
                 {
-                    props.breakingBadCharacters.map(val => {
+                    props.breakingBadCharacters.map((val, index) => {
                         return (
-                            <CharacterContainer name={val.name} nickName={val.nickName} occupation={val.occupation} />
+                            <CharacterContainer key={index} name={val.name} nickName={val.nickName} occupation={val.occupation} />
                         )
                     })
                 }
