@@ -32,7 +32,7 @@ const CharacterContainer = (props) => {
     return (
         <Container>
             <div>
-                <CharacterImg src="https://images.amcnetworks.com/amc.com/wp-content/uploads/2015/04/cast_bb_700x1000_mike-ehrmantraut-lg.jpg"/>
+                <CharacterImg src={props.img}></CharacterImg>
                 <CharacterName>{props.name}</CharacterName>
                 <CharacterSmallText> Nickname:  {props.nickName}</CharacterSmallText>
                 <CharacterSmallText> Occupation: {props.occupation} </CharacterSmallText>

@@ -8,16 +8,30 @@ export const fetchBreakingBadCharacterBegins = () => {
     }
 }
 
+export const onFetchingBreakingBadCharacters = (data) => {
+    return {
+     type: FETCH_BREAKING_BAD_CHARACTERS,
+     data: data
+     }
+ }
+
+ export const onFetchingBreakingBadCharactersFail = () => {
+    return {
+     type: FETCH_BREAKING_BAD_CHARACTERS_FAILURE
+     }
+ }
+
+
 export const fetchBreakingBadCharacters = () => {
     return dispatch => {
         dispatch(fetchBreakingBadCharacterBegins);
-        return fetch("https://www.breakingbadapi.com/api/characters")
+        fetch("https://www.breakingbadapi.com/api/characters?limit=10&offset=0")
                 .then(resp => resp.json())
                 .then(resp => {
-                    console.log(resp);
+                    dispatch(onFetchingBreakingBadCharacters(resp));
                 })
                 .catch(err => {
-                    console.log(err);
+                    dispatch(onFetchingBreakingBadCharactersFail());
                 });
     };
 }

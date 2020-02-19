@@ -13,47 +13,44 @@ const Container = styled.div`
     flex-wrap: wrap;
 `;
 
+const Btn = styled.button`
+    width: 100%;
+    padding: 1%;
+    font-size: 20px;
+    background-color: #093009;
+    color: white;
+`;
+
 const BreakingBad = (props) => {
 
-
-    store.dispatch(fetchBreakingBadCharacters());
-
     const handleClick = () => {
-        alert("Button clicked");
+        store.dispatch(fetchBreakingBadCharacters());
     }
 
     return (
-        /*<Container>
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-              <CharacterContainer name={'Mike Ermhantraut'} nickName={'Mike'} occupation={'Assasin'} />
-        </Container>*/
         <div>
-            <button onClick={handleClick}>Click to get Breaking bad characters</button>
+            <Btn onClick={handleClick}>
+                Click to get Breaking bad characters
+            </Btn>
+            
+            { props.loading && <p>Loading ....</p> }
+            {!props.loading && !props.error &&
             <Container>
                 {
                     props.breakingBadCharacters.map((val, index) => {
                         return (
-                            <CharacterContainer key={index} name={val.name} nickName={val.nickName} occupation={val.occupation} />
+                            <CharacterContainer key={index} img={val.img} name={val.name} nickName={val.nickName} occupation={val.occupation} />
                         )
                     })
                 }
-            </Container>
+            </Container> }
+            {!props.loading && props.error && <p> Somr=eething went wrong </p>}
         </div>
-
     );
 }
 
 
 function mapStateToProps(state) {
-    console.log(state);
     return {
         breakingBadCharacters: state.breakingBadCharacters
     };
